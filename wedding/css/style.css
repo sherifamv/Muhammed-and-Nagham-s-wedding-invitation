@@ -231,16 +231,19 @@ address{font-style:normal;letter-spacing:.08em;margin:.4rem 0 2.2rem}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 
-/* Music player */
-.music{position:fixed;z-index:20;top:max(.9rem,env(safe-area-inset-top));right:.9rem;display:flex;align-items:center;gap:.6rem;
-  padding:.55rem .95rem;border-radius:99px;background:rgba(255,253,248,.9);backdrop-filter:blur(8px);
-  border:1px solid rgba(185,154,87,.6);color:var(--burg);font-size:.68rem;letter-spacing:.14em}
-.eq{display:flex;align-items:flex-end;gap:2px;height:14px}
-.eq i{width:2px;height:4px;background:var(--burg);border-radius:2px}
-.music.playing .eq i{animation:eq 1s ease-in-out infinite}
-.music.playing .eq i:nth-child(2){animation-delay:-.3s}.music.playing .eq i:nth-child(3){animation-delay:-.6s}.music.playing .eq i:nth-child(4){animation-delay:-.15s}
-@keyframes eq{0%,100%{height:3px}50%{height:14px}}
-@media(max-width:420px){.music-label{display:none}.music{padding:.7rem}}
+/* Music button: round, one rotating note */
+.music{position:fixed;z-index:60;top:max(.9rem,env(safe-area-inset-top));right:.9rem;
+  width:48px;height:48px;display:grid;place-items:center;border-radius:50%;
+  background:var(--ivory);color:var(--burg);
+  border:1.5px solid var(--gold);
+  box-shadow:0 4px 14px rgba(67,13,25,.28),inset 0 0 0 3px rgba(185,154,87,.18);
+  transition:transform .4s var(--ease),box-shadow .4s}
+.music:hover{transform:scale(1.06)}
+.music .note{width:24px;height:24px;transform-origin:50% 50%}
+.music.playing .note{animation:spin 5s linear infinite}   /* rotates clockwise while the song plays */
+@keyframes spin{to{transform:rotate(360deg)}}
+/* label is kept for the script and for screen readers, but not shown */
+.music-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* Reduced motion: no animation, letter names show immediately */
 @media(prefers-reduced-motion:reduce){
